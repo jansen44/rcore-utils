@@ -3,13 +3,8 @@ name = "rcore-utils"
 version = "0.1.0"
 edition = "2021"
 
-[[bin]]
-name="yes"
-path="src/bin/yes/main.rs"
+[dependencies]
 
 [lib]
 name="core_lib"
 path="src/lib/lib.rs"
-
-
-[dependencies]
