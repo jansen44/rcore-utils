@@ -9,17 +9,19 @@ fn basic_main(program_name: &str) -> String {
 }
 
 fn cargo_insert(program_name: &str) -> std::io::Result<()> {
-    let cargo_toml = fs::read_to_string("../Cargo.toml")?;
+    let mut cargo_toml = fs::read("../Cargo.toml")?;
 
-    let contents = format!(
+    let mut contents = format!(
         "\n[[bin]]
 name=\"{program_name}\"
 path=\"src/bin/{program_name}/main.rs\"\n"
-    );
+    )
+    .as_bytes()
+    .to_vec();
 
-    let contents = format!("{cargo_toml}{contents}");
+    cargo_toml.append(&mut contents);
 
-    fs::write("../Cargo.toml", contents)?;
+    fs::write("../Cargo.toml", cargo_toml)?;
     Ok(())
 }
 
