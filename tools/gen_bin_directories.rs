@@ -30,13 +30,16 @@ fn main() {
     let commands = commands.split(" ");
 
     for command in commands {
-        let res = fs::create_dir(format!("./bin/{command}"));
+        let res = fs::create_dir(format!("../src/bin/{command}"));
         if res.is_err() {
             println!("error: Could not create dir '{command}': {:?}", res.err());
             continue;
         }
 
-        let res = fs::write(format!("./bin/{}/main.rs", command), basic_main(command));
+        let res = fs::write(
+            format!("../src/bin/{}/main.rs", command),
+            basic_main(command),
+        );
         if res.is_err() {
             println!(
                 "error: Could not create main file '{command}/main.rs': {:?}",
